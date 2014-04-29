@@ -1,0 +1,9 @@
+max	IS	$0
+	LOC	#100
+Main	SET	$1,19
+	SET	$2,42
+	SET	$3,11
+Compare	CMP	$4,$1,$2
+	CMP	$5,$2,$3
+	CMP	$6,
+
