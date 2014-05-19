@@ -1,0 +1,12 @@
+MIPS:
+Simulator: 183
+Board: 110
+
+CPI:
+nop: 1 CPI + 140 t
+add: 1 CPI + 140 t
+lbz: 2 CPI + 160 t
+div: 35 CPI + 820 t
+branch not: 3 CPI + 180 t
+branch: 0 CPI + 110 t
+
