@@ -10,3 +10,26 @@ div: 35 CPI + 820 t
 branch not: 3 CPI + 180 t
 branch: 0 CPI + 110 t
 
+do_count 49 pos:
+unmod: 1204 + 242 t
+partial: 729 + 147 t 
+cmov: 1104 + 222 t
+
+do_count 89 pos:
+unmod: 1204 + 242 t
+partial: 724 + 146 t
+cmov: 1104 + 222 t
+
+do_count 0 pos:
+unmod: 1204 + 242 t
+partial: 724 + 146 t
+cmov: 1104 + 222 t
+
+do_count 100 pos:
+unmod: 1204 + 242 t
+partial: 724 + 146 t
+cmov: 1104 + 222 t
+
+Der OpenRISC unterstuetzt das Result Forwarding:
+raw: 2 + 16 t
+not_raw: 2 + 16 t
