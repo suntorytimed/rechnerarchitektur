@@ -124,11 +124,16 @@ void cpi(int iterations, int cmd)
 void mips_measurement(int iterations)
 {
 	int i;
-	int number;
+	int number = 0;
+	int instructions = 11;
 	asm volatile ("l.nop");
-	//int start = timestamp;
+	int start = timestamp;
 	for (i = 0; i < iterations; i++) {
 		number = 5 + 4;
+		number = number + 4;
+		number = 5 + number;
+		number = 8 + number;
+		number = number + 7;
 		number = number * number;
 		number = number / 3;
 		number = number - 50;
@@ -138,8 +143,9 @@ void mips_measurement(int iterations)
 			number = number;
 		}
 	}
-	//int end = timestamp;
+	int end = timestamp;
 	asm volatile ("l.nop");
-	//int time = end - start;
+	int time = end - start;
 	printf("number: %i\n", number);
+	printf("MIPS: %i\n", (instructions * iterations) / (time * 10000));
 }
