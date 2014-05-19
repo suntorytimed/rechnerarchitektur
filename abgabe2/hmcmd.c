@@ -5,10 +5,10 @@
  *                                                                      *
  * -------------------------------------------------------------------- *
  * Version: 1.0
- * Authors:
- * Date:
- * Group:
- * Semester:
+ * Authors: Jennifer Liebel, Stefan Weiberg
+ * Date: 19.05.2014
+ * Group: -
+ * Semester: 4
  * Additional Notes:
  * -------------------------------------------------------------------- *
  * This file / the orpmon tool are under the GNU General Public License *
