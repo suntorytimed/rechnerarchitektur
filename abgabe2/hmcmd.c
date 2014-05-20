@@ -177,6 +177,7 @@ void branch(int iterations)
                 asm volatile (
 			"l.sfgtsi %0,0\n"
 			"l.bf 1f\n"
+			"l.nop\n"
 			"1:\n"
 			: : "r" (value)
 		);
@@ -190,6 +191,7 @@ void branch(int iterations)
 	        asm volatile (
                         "l.sfgtsi %0,0\n"
                         "l.bnf 1f\n"
+			"l.nop\n"
                         "1:\n"
 			: : "r" (value)
                 );
