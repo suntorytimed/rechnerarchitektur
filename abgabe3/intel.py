@@ -1,8 +1,12 @@
-#!/usr/bin/python -Es
+#!/usr/bin/python2.7 -Es
 # -*- coding: utf-8 -*-
 import random
-import parser
+import argparse
 from threading import Thread
+
+#parse arguments.
+desc = 'Multithreading average calculation'
+parser = argparse.ArgumentParser(description=desc)
 
 parser.add_argument('-t', '--threads', type=int, required=True,
                     help='Number of threads')
@@ -14,8 +18,8 @@ numbers = []
 
 random.seed()
 
-for i in range(100 * 1024 * 1024):
-    numbers += random.randint(-127, 127)
+for i in range(1024 * 1024):
+    numbers.append(random.randint(-127, 127))
 
 
 class Average():
@@ -37,10 +41,10 @@ def main(threads_num, numbers):
         numbers_calc = []
         for i in range((chunk_size * thread_number),
                        (chunk_size * thread_number + 1)):
-            numbers_calc += numbers[i]
+            numbers_calc.append(numbers[i])
         if thread_number == threads_num - 1:
             for i in range((chunk_size * thread_number + 1), len(numbers)):
-                numbers_calc += i
+                numbers_calc.append(i)
         threads += [Average(numbers_calc)]
 
     for thread in threads:
@@ -54,7 +58,6 @@ def main(threads_num, numbers):
         solution += thread.solution
 
     print solution / len(numbers)
-
 
 if __name__ == "__main__":
     main(threads_num, numbers)
