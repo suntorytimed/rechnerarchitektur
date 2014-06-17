@@ -1,24 +1,60 @@
 #!/usr/bin/python -Es
 # -*- coding: utf-8 -*-
 import random
+import parser
+from threading import Thread
 
-out=[]
-out.truncate(100 * 1024 * 1024)
+parser.add_argument('-t', '--threads', type=int, required=True,
+                    help='Number of threads')
+
+args = parser.parse_args()
+
+threads_num = args.threads
+numbers = []
 
 random.seed()
 
-for i in range(out):
-    out[i] = random.randint(-127,127)
+for i in range(100 * 1024 * 1024):
+    numbers += random.randint(-127, 127)
 
 
-with open("testfile.test", "r+") as f:
-    mm = mmap.mmap(f.fileno(), 0)
-    print mm.size()
+class Average():
 
-    try:
-        loop(mm)
-    except ValueError:
-        print "Write to file finished."
+    def __init__(self, numbers):
+        self.numbers = numbers
+        self.solution = 0
+        self.thread = Thread(target=self.calculate)
 
-    mm.flush()
-    mm.close()
+    def calculate(self):
+        for number in self.numbers:
+            self.solution += number
+
+
+def main(threads_num, numbers):
+    threads = []
+    chunk_size = len(numbers) / threads_num
+    for thread_number in range(threads_num):
+        numbers_calc = []
+        for i in range((chunk_size * thread_number),
+                       (chunk_size * thread_number + 1)):
+            numbers_calc += numbers[i]
+        if thread_number == threads_num - 1:
+            for i in range((chunk_size * thread_number + 1), len(numbers)):
+                numbers_calc += i
+        threads += [Average(numbers_calc)]
+
+    for thread in threads:
+        thread.thread.start()
+
+    for thread in threads:
+        thread.thread.join()
+
+    solution = 0
+    for thread in threads:
+        solution += thread.solution
+
+    print solution / len(numbers)
+
+
+if __name__ == "__main__":
+    main(threads_num, numbers)
